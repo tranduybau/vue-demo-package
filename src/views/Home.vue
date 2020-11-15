@@ -1,18 +1,40 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div>GETTER</div>
+    <div>{{ fullName }}</div>
+    <button @click="updateFullName">Setter</button>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import HelloWorld from "@/components/HelloWorld.vue";
 
 export default {
-  name: 'Home',
+  name: "Home",
   components: {
-    HelloWorld
-  }
-}
+    HelloWorld,
+  },
+  data: () => ({
+    firstName: "Bau",
+    lastName: "Tran Duy",
+  }),
+  computed: {
+    fullName: {
+      get() {
+        return this.firstName + " " + this.lastName;
+      },
+      set(newValue) {
+        var names = newValue.split(" ");
+        this.firstName = names[0];
+        this.lastName = names[names.length - 1];
+      },
+    },
+  },
+  methods: {
+    updateFullName() {
+      this.fullName = "Bau Cute";
+    },
+  },
+};
 </script>
