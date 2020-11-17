@@ -1,24 +1,26 @@
 <template>
   <div class="home">
-    <div>Dữ liệu localStorage hiện tại: {{ valueLocalStorage }}</div>
+    <div>Dữ liệu localStorage hiện tại: {{ store }}</div>
     <button @click="setValue">Update value</button>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
 import localStorage from "@/plugins/localStorage";
 
 export default {
   name: "Home",
-  computed: {
-    valueLocalStorage() {
-      return Number(localStorage.get());
+  data: () => ({
+    store: localStorage.get()
+  }),
+  watch: {
+    store() {
+      localStorage.set(this.store);
     }
   },
   methods: {
     setValue() {
-      return localStorage.set(this.valueLocalStorage + 1);
+      return (this.store += 1);
     }
   }
 };
