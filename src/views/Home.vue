@@ -1,18 +1,25 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <div>Dữ liệu localStorage hiện tại: {{ valueLocalStorage }}</div>
+    <button @click="setValue">Update value</button>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+import localStorage from "@/plugins/localStorage";
 
 export default {
   name: "Home",
-  components: {
-    HelloWorld
+  computed: {
+    valueLocalStorage() {
+      return Number(localStorage.get());
+    }
+  },
+  methods: {
+    setValue() {
+      return localStorage.set(this.valueLocalStorage + 1);
+    }
   }
 };
 </script>
